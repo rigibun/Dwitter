@@ -3,6 +3,7 @@
 	"description": "A minimal D application.",
 	"copyright": "Copyright © 2014, rigibun",
 	"authors": ["rigibun"],
+	"libs-posix": ["curl"],
 	"dependencies": {
 		"twitter4d": "~master"
 	}
