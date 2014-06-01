@@ -1,0 +1,9 @@
+{
+	"name": "Dwitter",
+	"description": "A minimal D application.",
+	"copyright": "Copyright © 2014, rigibun",
+	"authors": ["rigibun"],
+	"dependencies": {
+		"twitter4d": "~master"
+	}
+}
