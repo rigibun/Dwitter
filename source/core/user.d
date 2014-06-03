@@ -26,9 +26,6 @@ class User
     {
         screenName = user["screen_name"].str;
         name = user["name"].str;
-        description = user["description"].str;
-        location = user["location"].str;
-        url = user["url"].str;
         profileImageURL = user["profile_image_url"].str;
         createdAt = user["created_at"].str;
         id = user["id"].integer;
@@ -36,5 +33,9 @@ class User
         favouritesCount = user["favourites_count"].integer;
         friendsCount = user["friends_count"].integer;
         followersCount = user["followers_count"].integer;
+
+        description = user["description"].type != JSON_TYPE.NULL ? user["description"].str : "";
+        location = user["location"].type != JSON_TYPE.NULL ? user["location"].str : "";
+        url = user["url"].type != JSON_TYPE.NULL ? user["url"].str : "";
     }
 }
