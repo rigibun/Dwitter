@@ -14,6 +14,19 @@ class Dwitter
         twitter4d = new Twitter4D(consumerKey, consumerSecret, accessToken, accsessTokenSecret);
     }
 
+    // Timelines
+    public auto statuses_home_timeline()
+    {
+        return twitter4d.request("GET", "statuses/home_timeline.json").parseJSON.array
+            .map!(x => (new Status(x)));
+    }
+
+    public auto statuses_mentions_timeline()
+    {
+        return twitter4d.request("GET", "statuses/mentions_timeline.json").parseJSON.array
+            .map!(x => (new Status(x)));
+    }
+
     public auto users_show(string id)
     {
         auto params = ["id":id];
@@ -26,12 +39,6 @@ class Dwitter
         return new Status(twitter4d.request("GET", "statuses/show.json", params).parseJSON);
     }
 
-    public auto statuses_home_timeline()
-    {
-        auto timeline = twitter4d.request("GET", "statuses/home_timeline.json").parseJSON.array
-            .map!(x => (new Status(x)));
-        return timeline;
-    }
 }
 
 class DwitterConstructor
