@@ -1,4 +1,4 @@
-module core.user;
+module dwitter.user;
 import std.json, std.datetime;
 
 class User

@@ -1,4 +1,4 @@
-module utils.oauth;
+module dwitter.utils.oauth;
 
 class OAuth
 {

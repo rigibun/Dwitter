@@ -1,8 +1,8 @@
-module core.status;
+module dwitter.status;
 
 import std.json,
        std.typecons;
-import core.user;
+import dwitter.user;
 
 class Status
 {

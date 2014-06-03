@@ -1,9 +1,11 @@
+module dwitter.dwitter;
+
 import std.algorithm,
        std.json,
        twitter4d;
-import core.user,
-       core.status,
-       utils.oauth;
+import dwitter.user,
+       dwitter.status,
+       dwitter.utils.oauth;
 
 class Dwitter
 {
