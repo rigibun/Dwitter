@@ -1,5 +1,9 @@
-import utils.oauth;
-import twitter4d;
+import std.algorithm,
+       std.json,
+       utils.oauth,
+       twitter4d,
+       core.user,
+       core.tweet;
 
 class Dwitter
 {
@@ -8,6 +12,25 @@ class Dwitter
     this (string consumerKey, string consumerSecret, string accessToken, string accsessTokenSecret)
     {
         twitter4d = new Twitter4D(consumerKey, consumerSecret, accessToken, accsessTokenSecret);
+    }
+
+    public auto users_show(string id)
+    {
+        auto params = ["id":id];
+        return new User(twitter4d.request("GET", "users/show.json", params).parseJSON);
+    }
+
+    public auto statuses_show(string id)
+    {
+        auto params = ["id":id];
+        return new User(twitter4d.request("GET", "statuses/show.json", params).parseJSON);
+    }
+
+    public auto statuses_home_timeline()
+    {
+        auto timeline = twitter4d.request("GET", "statuses/home_timeline.json").parseJSON.array
+            .map!(x => (new Tweet(x)));
+        return timeline;
     }
 }
 
