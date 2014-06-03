@@ -15,19 +15,18 @@ class Tweet
         immutable ulong
             retweetCount,
             favoriteCount,
-            id;
-
-        const User user;
+            id,
+            userID;
     }
 
     this (JSONValue tweet)
     {
-        lang = tweet["ja"].str;
+        lang = tweet["lang"].str;
         text = tweet["text"].str;
         createdAt = tweet["created_at"].str;
         retweetCount = tweet["retweet_count"].integer;
         favoriteCount = tweet["favorite_count"].integer;
         id = tweet["id"].integer;
-        user = new User(tweet["user"]);
+        userID = tweet["user"].object["id"].integer;
     }
 }
