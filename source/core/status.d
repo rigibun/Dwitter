@@ -1,6 +1,7 @@
 module core.status;
 
-import std.json;
+import std.json,
+       std.typecons;
 import core.user;
 
 class Status
@@ -17,6 +18,8 @@ class Status
             favoriteCount,
             id,
             userID;
+
+        immutable Nullable!ulong inReplyToStatusID;
     }
 
     this (JSONValue status)
@@ -28,5 +31,7 @@ class Status
         favoriteCount = status["favorite_count"].integer;
         id = status["id"].integer;
         userID = status["user"].object["id"].integer;
+        if(status["in_reply_to_status_id"].type != JSON_TYPE.NULL)
+            inReplyToStatusID = status["in_reply_to_status_id"].integer;
     }
 }
