@@ -17,15 +17,27 @@ class Dwitter
     }
 
     // Timelines
-    public auto statuses_home_timeline(string[string] params = ["":""])
+    public auto statuses_home_timeline(string[string] options = ["":""])
     {
-        return twitter4d.request("GET", "statuses/home_timeline.json", params).parseJSON.array
+        return twitter4d.request("GET", "statuses/home_timeline.json", options).parseJSON.array
             .map!(x => (new Status(x)));
     }
 
-    public auto statuses_mentions_timeline(string[string] params = ["":""])
+    public auto statuses_user_timeline(string[string] options = ["":""])
     {
-        return twitter4d.request("GET", "statuses/mentions_timeline.json", params).parseJSON.array
+        return twitter4d.request("GET", "statuses/user_timeline.json", options).parseJSON.array
+            .map!(x => (new Status(x)));
+    }
+
+    public auto statuses_retweets_of_me(string[string] options = ["":""])
+    {
+        return twitter4d.request("GET", "statuses/retweets_of_me.json", options).parseJSON.array
+            .map!(x => (new Status(x)));
+    }
+
+    public auto statuses_mentions_timeline(string[string] options = ["":""])
+    {
+        return twitter4d.request("GET", "statuses/mentions_timeline.json", options).parseJSON.array
             .map!(x => (new Status(x)));
     }
 
@@ -36,7 +48,7 @@ class Dwitter
         return new User(twitter4d.request("GET", "users/show.json", params).parseJSON);
     }
 
-    // Statuses
+    // Tweets
     public auto statuses_show(string id)
     {
         auto params = ["id":id];
