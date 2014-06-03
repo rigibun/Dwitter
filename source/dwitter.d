@@ -23,7 +23,7 @@ class Dwitter
     public auto statuses_show(string id)
     {
         auto params = ["id":id];
-        return new User(twitter4d.request("GET", "statuses/show.json", params).parseJSON);
+        return new Status(twitter4d.request("GET", "statuses/show.json", params).parseJSON);
     }
 
     public auto statuses_home_timeline()
