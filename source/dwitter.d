@@ -17,15 +17,15 @@ class Dwitter
     }
 
     // Timelines
-    public auto statuses_home_timeline()
+    public auto statuses_home_timeline(string[string] params = ["":""])
     {
-        return twitter4d.request("GET", "statuses/home_timeline.json").parseJSON.array
+        return twitter4d.request("GET", "statuses/home_timeline.json", params).parseJSON.array
             .map!(x => (new Status(x)));
     }
 
-    public auto statuses_mentions_timeline()
+    public auto statuses_mentions_timeline(string[string] params = ["":""])
     {
-        return twitter4d.request("GET", "statuses/mentions_timeline.json").parseJSON.array
+        return twitter4d.request("GET", "statuses/mentions_timeline.json", params).parseJSON.array
             .map!(x => (new Status(x)));
     }
 
