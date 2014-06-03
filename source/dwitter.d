@@ -1,9 +1,9 @@
 import std.algorithm,
        std.json,
-       utils.oauth,
-       twitter4d,
-       core.user,
-       core.tweet;
+       twitter4d;
+import core.user,
+       core.status,
+       utils.oauth;
 
 class Dwitter
 {
@@ -29,7 +29,7 @@ class Dwitter
     public auto statuses_home_timeline()
     {
         auto timeline = twitter4d.request("GET", "statuses/home_timeline.json").parseJSON.array
-            .map!(x => (new Tweet(x)));
+            .map!(x => (new Status(x)));
         return timeline;
     }
 }
