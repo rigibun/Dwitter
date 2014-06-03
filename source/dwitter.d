@@ -29,12 +29,14 @@ class Dwitter
             .map!(x => (new Status(x)));
     }
 
+    // Users
     public auto users_show(string id)
     {
         auto params = ["id":id];
         return new User(twitter4d.request("GET", "users/show.json", params).parseJSON);
     }
 
+    // Statuses
     public auto statuses_show(string id)
     {
         auto params = ["id":id];
