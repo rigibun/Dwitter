@@ -2,6 +2,7 @@ module dwitter.dwitter;
 
 import std.algorithm,
        std.json,
+       std.conv,
        twitter4d;
 import dwitter.user,
        dwitter.status,
@@ -42,17 +43,41 @@ class Dwitter
     }
 
     // Users
-    public auto users_show(string id)
+    public auto users_show(ulong id)
     {
-        auto params = ["id":id];
+        auto params = ["id":id.to!string];
         return new User(twitter4d.request("GET", "users/show.json", params).parseJSON);
     }
 
     // Tweets
-    public auto statuses_show(string id)
+    public auto statuses_show(ulong id, string[string] options = ["":""])
     {
-        auto params = ["id":id];
+        auto params = options.dup;
+        params["id"] = id.to!string;
         return new Status(twitter4d.request("GET", "statuses/show.json", params).parseJSON);
+    }
+
+    public auto statuses_retweets(ulong id, string[string] options = ["":""])
+    {
+        auto params = options.dup;
+        params["id"] = id.to!string;
+        return new Status(twitter4d.request("GET", "statuses/retweets.json", params).parseJSON);
+    }
+
+    public auto statuses_update(string status, string[string] options = ["":""])
+    {
+
+        string[string] params;
+        if(options != ["":""])
+            params = options.dup;
+        params["status"] = status;
+
+        return new Status(twitter4d.request("POST", "statuses/update.json", params).parseJSON);
+    }
+
+    public auto statuses_destroy(ulong id, string[string] options = ["":""])
+    {
+        return new Status(twitter4d.request("POST", "statuses/destroy/" ~ id.to!string ~ ".json", options).parseJSON);
     }
 
 }
