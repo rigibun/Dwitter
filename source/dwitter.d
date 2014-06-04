@@ -80,7 +80,12 @@ class Dwitter
         return new Status(twitter4d.request("POST", "statuses/destroy/" ~ id.to!string ~ ".json", options).parseJSON);
     }
 
+    public auto statuses_retweet(ulong id, string[string] options = ["":""])
+    {
+        return new Status(twitter4d.request("POST", "statuses//" ~ id.to!string ~ ".json", options).parseJSON);
+    }
 }
+
 
 class DwitterConstructor
 {
